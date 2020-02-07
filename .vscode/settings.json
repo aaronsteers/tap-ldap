@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "C:\\Python38\\python.exe",
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "cSpell.words": [
+        "ldap",
+        "schema"
+    ]
+}
