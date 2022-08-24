@@ -25,9 +25,11 @@ def load_schemas():
 
 def discover(detect=True):
     if detect:
-        raw_schemas = []
-        for schema_name in ldap_core.SCHEMA_NAMES:
-            raw_schemas.append(ldap_core.detect_schema(schema_name))
+        raw_schemas = [
+            ldap_core.detect_schema(schema_name)
+            for schema_name in ldap_core.SCHEMA_NAMES
+        ]
+
     else:
         raw_schemas = catalog_spec.load_schemas()
     streams = []
