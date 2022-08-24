@@ -46,7 +46,6 @@ def get_all_data(stream_name):
     return run_query(
         ldap_conn, search_query=LDAP_QUERIES[stream_name], attribute_list=["*"]
     )
-    disconnect(ldap_conn)
 
 
 def run_query(
@@ -66,11 +65,10 @@ def run_query(
             result_type, result_data = ldap_conn.result(ldap_result_id, 0)
             if result_data == []:
                 break
-            else:
-                ## if you are expecting multiple results you can append them
-                ## otherwise you can just wait until the initial result and break out
-                if result_type == ldap.RES_SEARCH_ENTRY:
-                    yield result_data
+            ## if you are expecting multiple results you can append them
+            ## otherwise you can just wait until the initial result and break out
+            if result_type == ldap.RES_SEARCH_ENTRY:
+                yield result_data
     except ldap.LDAPError as e:
         print(e)
     disconnect(ldap_conn)

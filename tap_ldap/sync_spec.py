@@ -14,10 +14,7 @@ DEFAULT_BATCH_SIZE = 100
 
 
 def get_data():
-    # TODO: replace dummy data with a real get_data() interface
-    dummy_data = [{"id": "a"}, {"id": "b"}, {"id": "c"}]
-    for row in dummy_data:
-        yield row
+    yield from [{"id": "a"}, {"id": "b"}, {"id": "c"}]
 
 
 def _get_record_batches(batch_size=None):
@@ -41,7 +38,7 @@ def sync(config, state, catalog):
     # Loop over streams in catalog
     for stream in catalog.get_selected_streams(state):
         stream_id = stream.tap_stream_id
-        LOGGER.info("Syncing stream:" + stream_id)
+        LOGGER.info(f"Syncing stream:{stream_id}")
         # TODO: sync code for stream goes here...
         # schema={"properties": {"id": {"type": "string", "key": True}}}
         key_columns = ["id"]
